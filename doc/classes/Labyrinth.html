@@ -83,12 +83,54 @@
 Erzeugt aus einem gegebenen Text-File mit einem <a
 href="Labyrinth.html">Labyrinth</a> den dazugehörigen Graphen
 </p>
+<p>
+Die Knoten enthalten Informationen über ihre Eltern und als Wert einen
+Array mit den Koordinaten im <a href="Labyrinth.html">Labyrinth</a>
+</p>
+<p>
+Für jedes Feld wird berechnet, wie viele Richtungen es gibt, und welche
+davon besucht wurden.
+</p>
+<h2>Algorithmus zu Erzeugung des Baums</h2>
+<ol>
+<li>Starte beim Feld oben links
+
+</li>
+<li>Wenn das Feld noch nicht im Baum ist, erzeuge einen Knoten als Kind des
+Feldes, von dem man gekommen ist.
+
+</li>
+<li>Stelle die Anzahl der Richtungen fest, in die man vom aktuellen Feld aus
+gehen kann
+
+</li>
+<li>Wenn noch eine Richtung unbesucht ist, gehe zu einem unbesuchten
+Nachbarfeld, markiere im alten Feld die Richtung als besucht, gehe zu
+Schritt 2
+
+</li>
+<li>Sonst gehe einen Knoten/Feld zurück und gehe zu 2
+
+</li>
+<li>Wenn man wieder am Startknoten ist und keine Richtung unbesucht ist, dann
+ist der Baum feddich!
+
+</li>
+</ol>
 
     </div>
 
 
    </div>
 
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000001">new</a>&nbsp;&nbsp;
+      <a href="#M000002">to_s</a>&nbsp;&nbsp;
+      </div>
+    </div>
 
   </div>
 
@@ -105,6 +147,41 @@ href="Labyrinth.html">Labyrinth</a> den dazugehörigen Graphen
 
 
     <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="Labyrinth.src/M000001.html" target="Code" class="method-signature"
+            onclick="popupCode('Labyrinth.src/M000001.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(labyrinth, laenge, breite)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="Labyrinth.src/M000002.html" target="Code" class="method-signature"
+            onclick="popupCode('Labyrinth.src/M000002.html');return false;">
+          <span class="method-name">to_s</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
 
 
   </div>
