@@ -54,17 +54,18 @@ end
 #
 # 1. Starte beim Feld oben links
 # 2. Wenn das Feld noch nicht im Baum ist, erzeuge einen Knoten als Kind des Feldes, von dem man gekommen ist.
-# 3. Stelle die Anzahl der Richtungen fest, in die man vom aktuellen Feld aus gehen kann
+# 3. Stelle die Anzahl der Richtungen fest, in die man vom aktuellen Feld aus gehen kann und speichere sie als Information in den Knoten
 # 4. Wenn noch eine Richtung unbesucht ist, gehe zu einem unbesuchten Nachbarfeld, markiere im alten Feld die Richtung als besucht, gehe zu Schritt 2
 # 5. Sonst gehe einen Knoten/Feld zurück und gehe zu 2
-# 6. Wenn man wieder am Startknoten ist und keine Richtung unbesucht ist, dann ist der Baum feddich!
+# 6. Wenn man das Zielfeld zum Baum hinzugefügt hat, kann man abbrechen.
 class Labyrinth
-  def initialize(labyrinth, laenge, breite)
+  def initialize(labyrinth, breite, hoehe)
     @labyrinth = labyrinth
-    @laenge = laenge
+    @hoehe = hoehe
     @breite = breite
-    @baum = Tree::TreeNode.new("0,0")
+    @baum = Tree::TreeNode.new("0,0", richtungen([0,0]))
   end
+  
 # Der Koordinatenursprung liegt oben links, x geht nach rechts, y nach unten
 # Ziel ist es, die Möglichen Richtungen zu bestimmen
 # Die koordinaten sind ein Array von Integers
@@ -77,7 +78,7 @@ class Labyrinth
   
 # gibt die möglichen Richtungen eines Feldes als Array zurück. 
   def richtungen(koordinaten)
-    feld = feld(koordinaten)
+    feld = self.feld(koordinaten)
     richtungen = Array.new
     if feld[1][4,1] == " "
       richtungen.push "rechts"
@@ -94,13 +95,73 @@ class Labyrinth
     return richtungen
   end
   
+  #Hauptmethode der Klasse, verfährt nach dem obigen Algorithmus, um den Baum zu erzeugen
+  def createTree
+    
+    aktuelle_richtungen = self.richtungen([0,0])
+    koordinaten = [0,0]
+    letzter_name = ""
+    gekommen_von = [""]
+    aktueller_name = koordinaten.join(",")
+    aktueller_knoten = @baum
+    while true
+      if !aktuelle_richtungen.empty?
+        #Gehe weiter
+        direction = aktuelle_richtungen.pop
+        puts aktueller_knoten.content
+        aktueller_knoten.content = aktuelle_richtungen
+        puts aktueller_knoten.content
+        case direction
+        when "links"
+          koordinaten[0] -= 1
+          gekommen_von = ["rechts"]
+        when "rechts"
+          koordinaten[0] += 1
+          gekommen_von = ["links"]
+        when "oben"
+          koordinaten[1] -= 1
+          gekommen_von = ["unten"]
+        when "unten"
+          koordinaten[1] += 1
+          gekommen_von = ["oben"]
+        end
+        aktueller_name = koordinaten.join(",")
+        aktuelle_richtungen = richtungen(koordinaten)-gekommen_von #Richtung, aus der man gekommen ist, ist keine Neue möglichkeit
+        puts "Aktuelle Richtungen: #{aktuelle_richtungen.inspect}"
+        aktueller_knoten << Tree::TreeNode.new(aktueller_name, aktuelle_richtungen) #Der neue Knoten wird an den aktuellen Knoten angehängt
+        letzter_name = aktueller_name
+        aktueller_knoten
+        aktueller_knoten = aktueller_knoten[aktueller_name]  #Der aktuelle Knoten geht zum gerade hinzugefügten knoten
+        @baum.print_tree
+        
+
+        if koordinaten == [(@breite-1),(@hoehe-1)] # Wenn man jetzt auf den Koordinaten unten rechts ist, dann hat man den letzten nötigen Knoten hinzugefügt
+          "endkoordinaten erreicht"
+          break
+        end
+        
+      else
+        #Gehe zurück
+        aktueller_knoten = aktueller_knoten.parent
+        aktuelle_richtungen = aktueller_knoten.content
+        #Da die Koordinaten im Namen des Knotens verpackt sind, holen wir sie da wieder raus, 
+        #indem der Namensstring erst in ein Array aus Strings und diese dann in Integers umgewandelt werden.
+        koordinaten = aktueller_knoten.name.split(",").to_i
+        @baum 
+      end  
+    end
+    
+    puts "Baum erfolgreich erstellt"
+    return @baum
+  end
   def to_s
     #@baum.print_tree
     #puts @baum.name
-    @baum << Tree::TreeNode.new("0,1")
-    @baum << Tree::TreeNode.new("1,1")
-    @aktuellerKnoten = @baum["0,0"]
-    puts @baum["0,1"].siblings
+    @baum << Tree::TreeNode.new("0,1", "hallo2")
+    @baum << Tree::TreeNode.new("1,1", "hallo3")
+    
+    @baum.content = "content"
+    puts @baum[1].content
     #@baum.print_tree
   end
 end
@@ -113,5 +174,5 @@ if ARGV.length != 0
     labyrinth[x] = gets
   }
   a = Labyrinth.new(labyrinth, breite, hoehe)
-  puts a.richtungen([2,0]).inspect
+  a.createTree.print_tree
 end

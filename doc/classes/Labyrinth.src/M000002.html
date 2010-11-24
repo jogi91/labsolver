@@ -5,14 +5,16 @@
 
 <html>
 <head>
-  <title>to_s (Labyrinth)</title>
+  <title>feld (Labyrinth)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File labsolver.rb, line 58</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
-    <span class="ruby-ivar">@labyrinth</span>.<span class="ruby-identifier">to_s</span>
+  <pre><span class="ruby-comment cmt"># File labsolver.rb, line 73</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">feld</span>(<span class="ruby-identifier">koordinaten</span>)
+    <span class="ruby-identifier">yfeld</span> = (<span class="ruby-identifier">koordinaten</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">*</span><span class="ruby-value">2</span>)
+    <span class="ruby-identifier">xfeld</span> = <span class="ruby-identifier">koordinaten</span>[<span class="ruby-value">0</span>]<span class="ruby-operator">*</span><span class="ruby-value">4</span>
+    <span class="ruby-keyword kw">return</span> [<span class="ruby-ivar">@labyrinth</span>[<span class="ruby-identifier">yfeld</span>][<span class="ruby-identifier">xfeld</span>,<span class="ruby-value">5</span>],<span class="ruby-ivar">@labyrinth</span>[<span class="ruby-identifier">yfeld</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>][<span class="ruby-identifier">xfeld</span>,<span class="ruby-value">5</span>],<span class="ruby-ivar">@labyrinth</span>[<span class="ruby-identifier">yfeld</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>][<span class="ruby-identifier">xfeld</span>,<span class="ruby-value">5</span>]]
   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

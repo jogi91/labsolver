@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>createTree (Labyrinth)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File labsolver.rb, line 99</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">createTree</span>
+    
+    <span class="ruby-identifier">aktuelle_richtungen</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">richtungen</span>([<span class="ruby-value">0</span>,<span class="ruby-value">0</span>])
+    <span class="ruby-identifier">koordinaten</span> = [<span class="ruby-value">0</span>,<span class="ruby-value">0</span>]
+    <span class="ruby-identifier">letzter_name</span> = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-identifier">gekommen_von</span> = [<span class="ruby-value str">&quot;&quot;</span>]
+    <span class="ruby-identifier">aktueller_name</span> = <span class="ruby-identifier">koordinaten</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;,&quot;</span>)
+    <span class="ruby-identifier">aktueller_knoten</span> = <span class="ruby-ivar">@baum</span>
+    <span class="ruby-keyword kw">while</span> <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">aktuelle_richtungen</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-comment cmt">#Gehe weiter</span>
+        <span class="ruby-identifier">direction</span> = <span class="ruby-identifier">aktuelle_richtungen</span>.<span class="ruby-identifier">pop</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">aktueller_knoten</span>.<span class="ruby-identifier">content</span>
+        <span class="ruby-identifier">aktueller_knoten</span>.<span class="ruby-identifier">content</span> = <span class="ruby-identifier">aktuelle_richtungen</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">aktueller_knoten</span>.<span class="ruby-identifier">content</span>
+        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">direction</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;links&quot;</span>
+          <span class="ruby-identifier">koordinaten</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">gekommen_von</span> = [<span class="ruby-value str">&quot;rechts&quot;</span>]
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;rechts&quot;</span>
+          <span class="ruby-identifier">koordinaten</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">gekommen_von</span> = [<span class="ruby-value str">&quot;links&quot;</span>]
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;oben&quot;</span>
+          <span class="ruby-identifier">koordinaten</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">gekommen_von</span> = [<span class="ruby-value str">&quot;unten&quot;</span>]
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;unten&quot;</span>
+          <span class="ruby-identifier">koordinaten</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">gekommen_von</span> = [<span class="ruby-value str">&quot;oben&quot;</span>]
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">aktueller_name</span> = <span class="ruby-identifier">koordinaten</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;,&quot;</span>)
+        <span class="ruby-identifier">aktuelle_richtungen</span> = <span class="ruby-identifier">richtungen</span>(<span class="ruby-identifier">koordinaten</span>)<span class="ruby-operator">-</span><span class="ruby-identifier">gekommen_von</span> <span class="ruby-comment cmt">#Richtung, aus der man gekommen ist, ist keine Neue möglichkeit</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Aktuelle Richtungen: #{aktuelle_richtungen.inspect}&quot;</span>
+        <span class="ruby-identifier">aktueller_knoten</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Tree</span><span class="ruby-operator">::</span><span class="ruby-constant">TreeNode</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">aktueller_name</span>, <span class="ruby-identifier">aktuelle_richtungen</span>) <span class="ruby-comment cmt">#Der neue Knoten wird an den aktuellen Knoten angehängt</span>
+        <span class="ruby-identifier">letzter_name</span> = <span class="ruby-identifier">aktueller_name</span>
+        <span class="ruby-identifier">aktueller_knoten</span>
+        <span class="ruby-identifier">aktueller_knoten</span> = <span class="ruby-identifier">aktueller_knoten</span>[<span class="ruby-identifier">aktueller_name</span>]  <span class="ruby-comment cmt">#Der aktuelle Knoten geht zum gerade hinzugefügten knoten</span>
+        <span class="ruby-ivar">@baum</span>.<span class="ruby-identifier">print_tree</span>
+        
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">koordinaten</span> <span class="ruby-operator">==</span> [(<span class="ruby-ivar">@breite</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>),(<span class="ruby-ivar">@hoehe</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)] <span class="ruby-comment cmt"># Wenn man jetzt auf den Koordinaten unten rechts ist, dann hat man den letzten nötigen Knoten hinzugefügt</span>
+          <span class="ruby-value str">&quot;endkoordinaten erreicht&quot;</span>
+          <span class="ruby-keyword kw">break</span>
+        <span class="ruby-keyword kw">end</span>
+        
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-comment cmt">#Gehe zurück</span>
+        <span class="ruby-identifier">aktueller_knoten</span> = <span class="ruby-identifier">aktueller_knoten</span>.<span class="ruby-identifier">parent</span>
+        <span class="ruby-identifier">aktuelle_richtungen</span> = <span class="ruby-identifier">aktueller_knoten</span>.<span class="ruby-identifier">content</span>
+        <span class="ruby-comment cmt">#Da die Koordinaten im Namen des Knotens verpackt sind, holen wir sie da wieder raus, </span>
+        <span class="ruby-comment cmt">#indem der Namensstring erst in ein Array aus Strings und diese dann in Integers umgewandelt werden.</span>
+        <span class="ruby-identifier">koordinaten</span> = <span class="ruby-identifier">aktueller_knoten</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;,&quot;</span>).<span class="ruby-identifier">to_i</span>
+        <span class="ruby-ivar">@baum</span> 
+      <span class="ruby-keyword kw">end</span>  
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Baum erfolgreich erstellt&quot;</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@baum</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
