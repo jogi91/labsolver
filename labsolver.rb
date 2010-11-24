@@ -74,16 +74,26 @@ class Labyrinth
     xfeld = koordinaten[0]*4
     return [@labyrinth[yfeld][xfeld,5],@labyrinth[yfeld+1][xfeld,5],@labyrinth[yfeld+2][xfeld,5]]
   end
-# gibt die möglichen Richtungen eines Feldes zurück. 
+  
+# gibt die möglichen Richtungen eines Feldes als Array zurück. 
   def richtungen(koordinaten)
     feld = feld(koordinaten)
     richtungen = Array.new
     if feld[1][4,1] == " "
-      puts "richtung rechts frei"
-    else
-      puts "richtung rechts besetzt"
+      richtungen.push "rechts"
     end
+    if feld[1][0,1] == " "
+      richtungen.push "links"
+    end
+    if feld[0][1,1] == " "
+      richtungen.push "oben"
+    end
+    if feld[2][1,1] == " "
+      richtungen.push "unten"
+    end
+    return richtungen
   end
+  
   def to_s
     #@baum.print_tree
     #puts @baum.name
@@ -103,5 +113,5 @@ if ARGV.length != 0
     labyrinth[x] = gets
   }
   a = Labyrinth.new(labyrinth, breite, hoehe)
-  a.richtungen([5,5])
+  puts a.richtungen([2,0]).inspect
 end
