@@ -16,6 +16,7 @@
 
 require "rubygems"
 require "tree"
+require "jcode"
 
 # kleine Hilfsmethode, die jedes Element in einem Array in einen Integer umwandelt
 class Array
@@ -28,19 +29,46 @@ end
 
 #Klasse zum Lösen der Labyrinthe
 class Labsolver
-  def initialize(baum)
-    @baum = baum
+  def initialize(labyrinth,breite,hoehe)
+    @labyrinth = labyrinth
+    @hoehe = hoehe
+    @breite = breite
+    @ausgabe = @labyrinth
   end
-  
+
+#gibt einen Array zurück, der sämtliche Knoten enthält, in die ein o geschrieben werden soll  
+  def solve
+    baum = Labyrinth.new(@labyrinth,@breite,@hoehe)
+    @loesung = Array.new
+    baum.createTree.parentage.each { |e| 
+      @loesung.push e.name }
+    @loesung.push("#{@breite-1},#{@hoehe-1}")
+  end
   #gibt das gelöste labyrinth aus
   def print
+      self.solve
+    @loesung.each { |element|
+      draw(element.split(",").to_i)
+    }
+    puts @ausgabe
+  end
+  #Zeichnet ein o in das Feld mit den angegebenen Koordinaten
+  def draw(koordinaten)
+    ypos = koordinaten[1]*2+1
+    xpos = koordinaten[0]*4+2
+    @ausgabe[ypos][xpos,1] = "o"
   end
   #Methode zum debuggen
   def to_s
     self.inspect
   end
-  #gibt einen Array zurück, der sämtliche Knoten enthält, in die ein o geschrieben werden soll
   def solution?
+    puts @loesung.class
+    if !@loesung.empty?
+      return true
+    else
+      return false
+    end
   end
 end
 
@@ -108,9 +136,7 @@ class Labyrinth
       if !aktuelle_richtungen.empty?
         #Gehe weiter
         direction = aktuelle_richtungen.pop
-        puts aktueller_knoten.content
         aktueller_knoten.content = aktuelle_richtungen
-        puts aktueller_knoten.content
         case direction
         when "links"
           koordinaten[0] -= 1
@@ -127,12 +153,10 @@ class Labyrinth
         end
         aktueller_name = koordinaten.join(",")
         aktuelle_richtungen = richtungen(koordinaten)-gekommen_von #Richtung, aus der man gekommen ist, ist keine Neue möglichkeit
-        puts "Aktuelle Richtungen: #{aktuelle_richtungen.inspect}"
         aktueller_knoten << Tree::TreeNode.new(aktueller_name, aktuelle_richtungen) #Der neue Knoten wird an den aktuellen Knoten angehängt
         letzter_name = aktueller_name
         aktueller_knoten
         aktueller_knoten = aktueller_knoten[aktueller_name]  #Der aktuelle Knoten geht zum gerade hinzugefügten knoten
-        @baum.print_tree
         
 
         if koordinaten == [(@breite-1),(@hoehe-1)] # Wenn man jetzt auf den Koordinaten unten rechts ist, dann hat man den letzten nötigen Knoten hinzugefügt
@@ -147,12 +171,9 @@ class Labyrinth
         #Da die Koordinaten im Namen des Knotens verpackt sind, holen wir sie da wieder raus, 
         #indem der Namensstring erst in ein Array aus Strings und diese dann in Integers umgewandelt werden.
         koordinaten = aktueller_knoten.name.split(",").to_i
-        @baum 
       end  
     end
-    
-    puts "Baum erfolgreich erstellt"
-    return @baum
+    return aktueller_knoten
   end
   def to_s
     #@baum.print_tree
@@ -171,8 +192,8 @@ if ARGV.length != 0
   hoehe = gets.to_i
   labyrinth = Array.new
   (hoehe*2+1).times { |x|
-    labyrinth[x] = gets
+    labyrinth[x] = gets.chomp
   }
-  a = Labyrinth.new(labyrinth, breite, hoehe)
-  a.createTree.print_tree
+  a = Labsolver.new(labyrinth, breite, hoehe)
+  a.print
 end
