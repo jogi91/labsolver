@@ -103,15 +103,4 @@ class Labyrinth
     end
     return aktueller_knoten
   end
-  
-  def to_s
-    #@baum.print_tree
-    #puts @baum.name
-    @baum << Tree::TreeNode.new("0,1", "hallo2")
-    @baum << Tree::TreeNode.new("1,1", "hallo3")
-    
-    @baum.content = "content"
-    puts @baum[1].content
-    #@baum.print_tree
-  end
 end

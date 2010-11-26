@@ -5,7 +5,7 @@ class Labgenerator
   end
   
   
-  def feld(oeffnungen)
+  def createFeld(oeffnungen)
     feld = Array.new
     if oeffnungen.include? "oben"
       feld[0]= "+   +"
