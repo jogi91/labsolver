@@ -10,23 +10,23 @@
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File labsolver.rb, line 80</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">richtungen</span>(<span class="ruby-identifier">koordinaten</span>)
-    <span class="ruby-identifier">feld</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feld</span>(<span class="ruby-identifier">koordinaten</span>)
-    <span class="ruby-identifier">richtungen</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">feld</span>[<span class="ruby-value">1</span>][<span class="ruby-value">4</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot; &quot;</span>
-      <span class="ruby-identifier">richtungen</span>.<span class="ruby-identifier">push</span> <span class="ruby-value str">&quot;rechts&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">feld</span>[<span class="ruby-value">1</span>][<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot; &quot;</span>
-      <span class="ruby-identifier">richtungen</span>.<span class="ruby-identifier">push</span> <span class="ruby-value str">&quot;links&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">feld</span>[<span class="ruby-value">0</span>][<span class="ruby-value">1</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot; &quot;</span>
-      <span class="ruby-identifier">richtungen</span>.<span class="ruby-identifier">push</span> <span class="ruby-value str">&quot;oben&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">feld</span>[<span class="ruby-value">2</span>][<span class="ruby-value">1</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot; &quot;</span>
-      <span class="ruby-identifier">richtungen</span>.<span class="ruby-identifier">push</span> <span class="ruby-value str">&quot;unten&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">richtungen</span>
-  <span class="ruby-keyword kw">end</span></pre>
+  <pre>    <span class="ruby-comment cmt"># File labyrinth.rb, line 37</span>
+37:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">richtungen</span>(<span class="ruby-identifier">koordinaten</span>)
+38:     <span class="ruby-identifier">feld</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feld</span>(<span class="ruby-identifier">koordinaten</span>)
+39:     <span class="ruby-identifier">richtungen</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+40:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">feld</span>[<span class="ruby-value">1</span>][<span class="ruby-value">4</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot; &quot;</span>
+41:       <span class="ruby-identifier">richtungen</span>.<span class="ruby-identifier">push</span> <span class="ruby-value str">&quot;rechts&quot;</span>
+42:     <span class="ruby-keyword kw">end</span>
+43:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">feld</span>[<span class="ruby-value">1</span>][<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot; &quot;</span>
+44:       <span class="ruby-identifier">richtungen</span>.<span class="ruby-identifier">push</span> <span class="ruby-value str">&quot;links&quot;</span>
+45:     <span class="ruby-keyword kw">end</span>
+46:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">feld</span>[<span class="ruby-value">0</span>][<span class="ruby-value">1</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot; &quot;</span>
+47:       <span class="ruby-identifier">richtungen</span>.<span class="ruby-identifier">push</span> <span class="ruby-value str">&quot;oben&quot;</span>
+48:     <span class="ruby-keyword kw">end</span>
+49:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">feld</span>[<span class="ruby-value">2</span>][<span class="ruby-value">1</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot; &quot;</span>
+50:       <span class="ruby-identifier">richtungen</span>.<span class="ruby-identifier">push</span> <span class="ruby-value str">&quot;unten&quot;</span>
+51:     <span class="ruby-keyword kw">end</span>
+52:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">richtungen</span>
+53:   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>File: labsolver.rb</title>
+  <title>File: labyrinth.rb</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
@@ -47,16 +47,16 @@
 
 
   <div id="fileHeader">
-    <h1>labsolver.rb</h1>
+    <h1>labyrinth.rb</h1>
     <table class="header-table">
     <tr class="top-aligned-row">
       <td><strong>Path:</strong></td>
-      <td>labsolver.rb
+      <td>labyrinth.rb
       </td>
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Fri Nov 26 10:39:00 +0100 2010</td>
+      <td>Fri Nov 26 11:08:45 +0100 2010</td>
     </tr>
     </table>
   </div>
@@ -70,10 +70,51 @@
 
     <div id="description">
       <p>
-Das ist die Klasse zum Lösen der Labyrinthe. Ihr werden ein <a
-href="../classes/Labyrinth.html">Labyrinth</a>, die Höhe und die Breite
-übergeben.
+Erzeugt aus einem gegebenen Text-File mit einem <a
+href="../classes/Labyrinth.html">Labyrinth</a> den dazugehörigen Graphen
 </p>
+<p>
+Die Knoten enthalten als Name ihre Koordinaten als String der Form
+&quot;x,y&quot;. So kann leicht auf sie zugegriffen werden, indem sie beim
+Namen benannt werden, denn ein <a href="../classes/Array.html">Array</a>
+mit den Koordinaten kann einfach mit join(&quot;,&quot;) zu einem String
+zusammengefügt werden. Der umgekehrte Weg läuft über die Methode
+split(&quot;,&quot;). Da sie jedoch einen <a
+href="../classes/Array.html">Array</a> aus Strings erzeugt, wurde die
+Klasse <a href="../classes/Array.html">Array</a> mit der Methode to_i
+erweitert.
+</p>
+<p>
+Für jedes Feld wird berechnet, wie viele Richtungen es gibt, und welche
+davon besucht wurden. Diese Information wird als <a
+href="../classes/Array.html">Array</a> in den Knoten gespeichert. So kann
+der Algorithmus einfach umgesetzt werden.
+</p>
+<h2>Algorithmus zu Erzeugung des Baums</h2>
+<ol>
+<li>Starte beim Feld oben links
+
+</li>
+<li>Wenn das Feld noch nicht im Baum ist, erzeuge einen neuen Knoten als Kind
+des Feldes, von dem man gekommen ist.
+
+</li>
+<li>Stelle die Anzahl der Richtungen fest, in die man vom aktuellen Feld aus
+gehen kann und speichere sie als Information in den Knoten
+
+</li>
+<li>Wenn noch eine Richtung unbesucht ist, gehe zu einem unbesuchten
+Nachbarfeld, markiere im alten Feld die Richtung als besucht, gehe zu
+Schritt 2
+
+</li>
+<li>Sonst gehe einen Knoten/Feld zurück und gehe zu 2
+
+</li>
+<li>Wenn man das Zielfeld zum Baum hinzugefügt hat, kann man abbrechen.
+
+</li>
+</ol>
 
     </div>
 

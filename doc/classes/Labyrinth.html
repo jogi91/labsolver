@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../files/labsolver_rb.html">
-                labsolver.rb
+                <a href="../files/labyrinth_rb.html">
+                labyrinth.rb
                 </a>
         <br />
             </td>
@@ -84,20 +84,28 @@ Erzeugt aus einem gegebenen Text-File mit einem <a
 href="Labyrinth.html">Labyrinth</a> den dazugehörigen Graphen
 </p>
 <p>
-Die Knoten enthalten als Name ihre Koordinaten im Feld als <a
-href="Array.html">Array</a>.
+Die Knoten enthalten als Name ihre Koordinaten als String der Form
+&quot;x,y&quot;. So kann leicht auf sie zugegriffen werden, indem sie beim
+Namen benannt werden, denn ein <a href="Array.html">Array</a> mit den
+Koordinaten kann einfach mit join(&quot;,&quot;) zu einem String
+zusammengefügt werden. Der umgekehrte Weg läuft über die Methode
+split(&quot;,&quot;). Da sie jedoch einen <a href="Array.html">Array</a>
+aus Strings erzeugt, wurde die Klasse <a href="Array.html">Array</a> mit
+der Methode to_i erweitert.
 </p>
 <p>
 Für jedes Feld wird berechnet, wie viele Richtungen es gibt, und welche
-davon besucht wurden.
+davon besucht wurden. Diese Information wird als <a
+href="Array.html">Array</a> in den Knoten gespeichert. So kann der
+Algorithmus einfach umgesetzt werden.
 </p>
 <h2>Algorithmus zu Erzeugung des Baums</h2>
 <ol>
 <li>Starte beim Feld oben links
 
 </li>
-<li>Wenn das Feld noch nicht im Baum ist, erzeuge einen Knoten als Kind des
-Feldes, von dem man gekommen ist.
+<li>Wenn das Feld noch nicht im Baum ist, erzeuge einen neuen Knoten als Kind
+des Feldes, von dem man gekommen ist.
 
 </li>
 <li>Stelle die Anzahl der Richtungen fest, in die man vom aktuellen Feld aus

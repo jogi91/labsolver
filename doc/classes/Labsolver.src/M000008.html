@@ -5,14 +5,20 @@
 
 <html>
 <head>
-  <title>to_s (Labsolver)</title>
+  <title>print (Labsolver)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File labsolver.rb, line 39</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
-    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">inspect</span>
-  <span class="ruby-keyword kw">end</span></pre>
+  <pre>    <span class="ruby-comment cmt"># File labsolver.rb, line 22</span>
+22:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print</span>
+23:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@loesung</span>.<span class="ruby-identifier">nil?</span>
+24:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">solve</span> <span class="ruby-comment cmt"># Nur lösen, wenn die Lösung noch nicht berechnet wurde (Spart Zeit, wenn der Baum mehrmals gezeichnet werden muss)</span>
+25:     <span class="ruby-keyword kw">end</span>
+26:     <span class="ruby-ivar">@loesung</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">element</span><span class="ruby-operator">|</span>
+27:       <span class="ruby-identifier">draw</span>(<span class="ruby-identifier">element</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;,&quot;</span>).<span class="ruby-identifier">to_i</span>) <span class="ruby-comment cmt">#Jeder Knotenname wird in die Koordinaten konvertiert und dann wird an der Stelle ein o gezeichnet</span>
+28:     }
+29:     <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@ausgabe</span>
+30:   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

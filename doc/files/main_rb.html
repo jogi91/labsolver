@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>File: labsolver.rb</title>
+  <title>File: main.rb</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
@@ -47,16 +47,16 @@
 
 
   <div id="fileHeader">
-    <h1>labsolver.rb</h1>
+    <h1>main.rb</h1>
     <table class="header-table">
     <tr class="top-aligned-row">
       <td><strong>Path:</strong></td>
-      <td>labsolver.rb
+      <td>main.rb
       </td>
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Fri Nov 26 10:39:00 +0100 2010</td>
+      <td>Fri Nov 26 11:07:56 +0100 2010</td>
     </tr>
     </table>
   </div>
@@ -69,14 +69,49 @@
   <div id="contextContent">
 
     <div id="description">
-      <p>
-Das ist die Klasse zum Lösen der Labyrinthe. Ihr werden ein <a
-href="../classes/Labyrinth.html">Labyrinth</a>, die Höhe und die Breite
-übergeben.
+      <h1><a href="../classes/Labyrinth.html">Labyrinth</a>-Aufgabe</h1>
+<p>
+Dies ist die Lösung von Jogi zu folgender Aufgabe: <a
+href="http://bl.kanti-wohlen.ch/index.php?title=Einf-2011/Graphentheorie#Labyrinth">bl.kanti-wohlen.ch/index.php?title=Einf-2011/Graphentheorie#Labyrinth</a>
 </p>
+<h2>Lösungsansatz</h2>
+<p>
+Der zum <a href="../classes/Labyrinth.html">Labyrinth</a> gehörende Graph
+ist ein Baum. In einem ersten Schritt soll ein Baum erzeugt werden, in dem
+jedes Feld ein Knoten ist. Das übernimmt die Klasse <a
+href="../classes/Labyrinth.html">Labyrinth</a>. Root-Knoten ist der
+Startpunkt. Somit lässt sich der Weg vom Blatt, dass den Zielknoten
+enthält, zur Wurzel dadurch erreichen, indem man stets zum Elternknoten
+geht, bis Root erreicht ist. Das und das Zeichnen des Labyrinths wird von
+der Klasse <a href="../classes/Labsolver.html">Labsolver</a> übernommen.
+</p>
+<h2>Installation</h2>
+<p>
+Es muss lediglich der Rubygem rubytree installiert werden:
+</p>
+<ul>
+<li>sudo apt-get install rubygems
+
+</li>
+<li>sudo gem install rubytree
+
+</li>
+</ul>
 
     </div>
 
+    <div id="requires-list">
+      <h3 class="section-bar">Required files</h3>
+
+      <div class="name-list">
+      rubygems&nbsp;&nbsp;
+      tree&nbsp;&nbsp;
+      <a href="tools_rb.html">tools</a>&nbsp;&nbsp;
+      <a href="labyrinth_rb.html">labyrinth</a>&nbsp;&nbsp;
+      <a href="labsolver_rb.html">labsolver</a>&nbsp;&nbsp;
+      <a href="labgenerator_rb.html">labgenerator</a>&nbsp;&nbsp;
+      </div>
+    </div>
 
    </div>
 
