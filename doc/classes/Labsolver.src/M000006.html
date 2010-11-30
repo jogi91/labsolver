@@ -5,17 +5,18 @@
 
 <html>
 <head>
-  <title>new (Labsolver)</title>
+  <title>solve (Labsolver)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre>    <span class="ruby-comment cmt"># File labsolver.rb, line 5</span>
- 5:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">labyrinth</span>,<span class="ruby-identifier">breite</span>,<span class="ruby-identifier">hoehe</span>)
- 6:     <span class="ruby-ivar">@labyrinth</span> = <span class="ruby-identifier">labyrinth</span>
- 7:     <span class="ruby-ivar">@hoehe</span> = <span class="ruby-identifier">hoehe</span>
- 8:     <span class="ruby-ivar">@breite</span> = <span class="ruby-identifier">breite</span>
- 9:     <span class="ruby-ivar">@ausgabe</span> = <span class="ruby-ivar">@labyrinth</span>
-10:   <span class="ruby-keyword kw">end</span></pre>
+  <pre>    <span class="ruby-comment cmt"># File labsolver.rb, line 13</span>
+13:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">solve</span>
+14:     <span class="ruby-identifier">baum</span> = <span class="ruby-constant">Labyrinth</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@labyrinth</span>,<span class="ruby-ivar">@breite</span>,<span class="ruby-ivar">@hoehe</span>) <span class="ruby-comment cmt">#Labyrinthobjekt wird angelegt</span>
+15:     <span class="ruby-ivar">@loesung</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+16:     <span class="ruby-identifier">baum</span>.<span class="ruby-identifier">createTree</span>.<span class="ruby-identifier">parentage</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-comment cmt"># Baum wird erzeugt, vom Zielknoten geht man zu Root und notiert den Namen von jeden Knoten auf dem Weg dahin.</span>
+17:       <span class="ruby-ivar">@loesung</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span> }
+18:     <span class="ruby-ivar">@loesung</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{@breite-1},#{@hoehe-1}&quot;</span>) <span class="ruby-comment cmt">#Der Zielkonoten wird dabei nicht erwischt, daher wird er hier von Hand hinzugefügt</span>
+19:   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

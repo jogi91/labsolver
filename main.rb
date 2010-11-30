@@ -17,23 +17,26 @@
 require "rubygems"
 require "tree"
 
-require "tools"
+require "tools" #Enthält im Moment nur ein Werkzeug
 require "labyrinth"
 require "labsolver"
-require "labgenerator"
 
 
 
 
 if ARGV.length != 0
+  #Das File wird eingelesen
   breite = gets.to_i
   hoehe = gets.to_i
   labyrinth = Array.new
   (hoehe*2+1).times { |x|
     labyrinth[x] = gets.chomp
   }
+  #In das entsprechende Objekt gepackt
   a = Labsolver.new(labyrinth, breite, hoehe)
+  #Kommt richtig gelöst wieder Raus
   a.print
-  b = Labgenerator.new
-  #puts b.feld("rechtslinks")
+else
+  puts "Kein Labyrinth zum Lösen angegeben"
+  puts "Usage: ruby main.rb labyrinthfile.txt"
 end

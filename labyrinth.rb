@@ -20,13 +20,13 @@ class Labyrinth
     @labyrinth = labyrinth
     @hoehe = hoehe
     @breite = breite
-    @baum = Tree::TreeNode.new("0,0", richtungen([0,0]))
+    @baum = Tree::TreeNode.new("0,0", richtungen([0,0])) #Der Baum mit den Lösungen wird schon hier angelegt
   end
   
-# Der Koordinatenursprung liegt oben links, x geht nach rechts, y nach unten
-# Ziel ist es, die Möglichen Richtungen zu bestimmen
-# Die koordinaten sind ein Array von Integers
-# Die Funktion gibt ein Array aus 3 Strings zurück
+# * Der Koordinatenursprung liegt oben links, x geht nach rechts, y nach unten.
+# * Ziel ist es, die Möglichen Richtungen zu bestimmen.
+# * Die koordinaten sind ein Array von Integers
+# * Die Funktion gibt ein Array aus 3 Strings zurück
   def feld(koordinaten)
     yfeld = (koordinaten[1]*2)
     xfeld = koordinaten[0]*4
@@ -83,12 +83,11 @@ class Labyrinth
         aktuelle_richtungen = richtungen(koordinaten)-gekommen_von #Richtung, aus der man gekommen ist, ist keine Neue möglichkeit
         aktueller_knoten << Tree::TreeNode.new(aktueller_name, aktuelle_richtungen) #Der neue Knoten wird an den aktuellen Knoten angehängt
         letzter_name = aktueller_name
-        aktueller_knoten
         aktueller_knoten = aktueller_knoten[aktueller_name]  #Der aktuelle Knoten geht zum gerade hinzugefügten knoten
         
 
         if koordinaten == [(@breite-1),(@hoehe-1)] # Wenn man jetzt auf den Koordinaten unten rechts ist, dann hat man den letzten nötigen Knoten hinzugefügt
-          "endkoordinaten erreicht"
+          #"endkoordinaten erreicht"
           break
         end
         
